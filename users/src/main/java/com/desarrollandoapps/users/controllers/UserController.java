@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -53,7 +54,7 @@ public class UserController {
         return ResponseEntity.ok(cars);
     }
 
-    // Obtiene el listado de carros de un usuario
+    // Obtiene el listado de motos de un usuario
     @GetMapping("/motos/{userId}")
     public ResponseEntity<List<Moto>> getMotosByUser(@PathVariable("userId") int userId)
     {
@@ -64,4 +65,53 @@ public class UserController {
         List<Moto> motos = userService.getMotos(userId);
         return ResponseEntity.ok(motos);
     }
+
+    // Comunica con el microservicio car-service por medio de Feign
+    @PostMapping("/car/{userId}")
+    public ResponseEntity<Car> saveCarUser(@PathVariable("userId") int userId, @RequestBody Car car)
+    {
+        Car newCar = userService.saveCar(userId, car);
+        return ResponseEntity.ok(newCar);
+    }
+
+    // Comunica con el microservicio moto-service por medio de Feign
+    @PostMapping("/moto/{userId}")
+    public ResponseEntity<Moto> saveMotoUser(@PathVariable("userId") int userId, @RequestBody Moto moto)
+    {
+        Moto newMoto = userService.saveMoto(userId, moto);
+        return ResponseEntity.ok(newMoto);
+    }
+
+    @GetMapping("/all/{userId}")
+    public ResponseEntity<Map<String, Object>> getAllVehicles(@PathVariable("userId") int userId)
+    {
+        Map<String, Object> resultado = userService.getUserAndVehicles(userId);
+        return ResponseEntity.ok(resultado);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
