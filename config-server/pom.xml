@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.desarrollandoapps</groupId>
-	<artifactId>config-server</artifactId>
+	<artifactId>config-service</artifactId>
 	<version>1.0.0</version>
 	<name>config-server</name>
 	<description>Demo project for Spring Boot</description>
